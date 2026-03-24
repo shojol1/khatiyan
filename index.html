@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>খতিয়ান হিসাব</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+
+        .person-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr) auto;
+            gap: 8px;
+            margin-bottom: 12px;
+            align-items: end;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease;
+            min-width: 800px;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        input, select {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            width: 100%;
+            min-width: 0;
+        }
+
+        select {
+            cursor: pointer;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .label {
+            font-size: 0.75em;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .dag-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: end;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+        }
+
+        .result-section {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 0.85em;
+        }
+
+        .result-table th, .result-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .result-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .total-row {
+            background: #e8f5e9 !important;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-card h3 {
+            color: #667eea;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+        }
+
+        .summary-card .value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .percentage-badge {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            margin-left: 5px;
+        }
+
+        @media (min-width: 1024px) {
+            .person-row {
+                min-width: auto;
+                grid-template-columns: 2fr repeat(5, 1fr) auto;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .person-row {
+                min-width: 700px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 12px;
+            }
+            
+            .person-row {
+                min-width: 750px;
+                gap: 6px;
+                padding: 10px;
+            }
+            
+            input, select {
+                padding: 8px 6px;
+                font-size: 0.85em;
+            }
+            
+            .label {
+                font-size: 0.7em;
+            }
+        }
+
+        .scroll-hint {
+            display: none;
+            text-align: center;
+            color: #666;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            padding: 5px;
+            background: #e3f2fd;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 767px) {
+            .scroll-hint {
+                display: block;
+            }
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 খতিয়ান হিসাব</h1>
+            <p>ঐতিহ্যবাহী একক অনুযায়ী জমি ভাগ করুন</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Names and Portions -->
+            <div class="section">
+                <h2 class="section-title">সেকশন ১: ব্যক্তি এবং অংশ</h2>
+                <div class="scroll-hint">👆 বামে ডানে স্ক্রল করুন</div>
+                <div class="scroll-container">
+                    <div id="persons-container"></div>
+                </div>
+                <button class="add-btn" onclick="addPerson()" title="নতুন ব্যক্তি যোগ করুন">+</button>
+            </div>
+
+            <!-- Section 2: Dag Numbers -->
+            <div class="section">
+                <h2 class="section-title">সেকশন ২: দাগ নম্বর এবং জমির পরিমাণ</h2>
+                <div id="dags-container"></div>
+                <button class="add-btn" onclick="addDag()" title="নতুন দাগ যোগ করুন">+</button>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateResults()">
+                📊 ফলাফল দেখুন
+            </button>
+
+            <div id="result-section" class="result-section">
+                <h2 class="result-title">📋 হিসাবের ফলাফল</h2>
+                
+                <div id="status-message"></div>
+                
+                <div class="summary-cards" id="summary-cards"></div>
+                
+                <div class="scroll-container">
+                    <table class="result-table" id="result-table">
+                        <thead id="result-head"></thead>
+                        <tbody id="result-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let personCount = 0;
+        let dagCount = 0;
+
+        const CONVERSIONS = {
+            gondaToAna: 1/20,
+            karaToAna: 1/160,
+            krantiToAna: 1/480,
+            tilToAna: 1/9600
+        };
+
+        window.onload = function() {
+            addPerson();
+            addDag();
+        };
+
+        function addPerson() {
+            personCount++;
+            const container = document.getElementById('persons-container');
+            
+            const personDiv = document.createElement('div');
+            personDiv.className = 'person-row';
+            personDiv.id = `person-${personCount}`;
+            
+            personDiv.innerHTML = `
+                <div>
+                    <div class="label">নাম</div>
+                    <input type="text" placeholder="নাম লিখুন" class="person-name" required>
+                </div>
+                <div>
+                    <div class="label">আনা</div>
+                    <select class="portion-ana">
+                        <option value="0">আনা নির্বাচন</option>
+                        <option value="1">১ আনা (৴)</option>
+                        <option value="2">২ আনা (৵)</option>
+                        <option value="3">৩ আনা (৶)</option>
+                        <option value="4">৪ আনা (৷)</option>
+                        <option value="5">৫ আনা (৷⁄)</option>
+                        <option value="6">৬ আনা (৷৵)</option>
+                        <option value="7">৭ আনা (৷৶)</option>
+                        <option value="8">৮ আনা (৷৷)</option>
+                        <option value="9">৯ আনা (৷৷⁄)</option>
+                        <option value="10">১০ আনা (৷৷৵)</option>
+                        <option value="11">১১ আনা (৷৷৶)</option>
+                        <option value="12">১২ আনা (৸)</option>
+                        <option value="13">১৩ আনা (৸⁄)</option>
+                        <option value="14">১৪ আনা (৸৵)</option>
+                        <option value="15">১৫ আনা (৸৶)</option>
+                        <option value="16">১৬ আনা (১্)</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="label">গন্ডা</div>
+                    <select class="portion-gonda">
+                        <option value="0">গন্ডা নির্বাচন</option>
+                        <option value="1">১ গন্ডা</option>
+                        <option value="2">২ গন্ডা</option>
+                        <option value="3">৩ গন্ডা</option>
+                        <option value="4">৪ গন্ডা</option>
+                        <option value="5">৫ গন্ডা</option>
+                        <option value="6">৬ গন্ডা</option>
+                        <option value="7">৭ গন্ডা</option>
+                        <option value="8">৮ গন্ডা</option>
+                        <option value="9">৯ গন্ডা</option>
+                        <option value="10">১০ গন্ডা</option>
+                        <option value="11">১১ গন্ডা</option>
+                        <option value="12">১২ গন্ডা</option>
+                        <option value="13">১৩ গন্ডা</option>
+                        <option value="14">১৪ গন্ডা</option>
+                        <option value="15">১৫ গন্ডা</option>
+                        <option value="16">১৬ গন্ডা</option>
+                        <option value="17">১৭ গন্ডা</option>
+                        <option value="18">১৮ গন্ডা</option>
+                        <option value="19">১৯ গন্ডা</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="label">কড়া</div>
+                    <select class="portion-kara">
+                        <option value="0">কড়া নির্বাচন</option>
+                        <option value="1">১ কড়া (|)</option>
+                        <option value="2">২ কড়া (||)</option>
+                        <option value="3">৩ কড়া (৸)</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="label">ক্রান্তি</div>
+                    <select class="portion-kranti">
+                        <option value="0">ক্রান্তি নির্বাচন</option>
+                        <option value="1">১ ক্রান্তি (/)</option>
+                        <option value="2">২ ক্রান্তি (//)</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="label">তিল</div>
+                    <select class="portion-til">
+                        <option value="0">তিল নির্বাচন</option>
+                        <option value="1">১ তিল</option>
+                        <option value="2">২ তিল</option>
+                        <option value="3">৩ তিল</option>
+                        <option value="4">৪ তিল</option>
+                        <option value="5">৫ তিল</option>
+                        <option value="6">৬ তিল</option>
+                        <option value="7">৭ তিল</option>
+                        <option value="8">৮ তিল</option>
+                        <option value="9">৯ তিল</option>
+                        <option value="10">১০ তিল</option>
+                        <option value="11">১১ তিল</option>
+                        <option value="12">১২ তিল</option>
+                        <option value="13">১৩ তিল</option>
+                        <option value="14">১৪ তিল</option>
+                        <option value="15">১৫ তিল</option>
+                        <option value="16">১৬ তিল</option>
+                        <option value="17">১৭ তিল</option>
+                        <option value="18">১৮ তিল</option>
+                        <option value="19">১৯ তিল</option>
+                    </select>
+                </div>
+                <button class="remove-btn" onclick="removePerson(${personCount})" title="মুছে ফেলুন">×</button>
+            `;
+            
+            container.appendChild(personDiv);
+        }
+
+        function removePerson(id) {
+            const element = document.getElementById(`person-${id}`);
+            if (document.querySelectorAll('.person-row').length > 1) {
+                element.remove();
+            } else {
+                alert('কমপক্ষে একজন ব্যক্তি থাকতে হবে!');
+            }
+        }
+
+        function addDag() {
+            dagCount++;
+            const container = document.getElementById('dags-container');
+            
+            const dagDiv = document.createElement('div');
+            dagDiv.className = 'dag-row';
+            dagDiv.id = `dag-${dagCount}`;
+            
+            dagDiv.innerHTML = `
+                <div>
+                    <div class="label">দাগ নম্বর</div>
+                    <input type="text" placeholder="দাগ নম্বর" class="dag-number" required>
+                </div>
+                <div>
+                    <div class="label">জমির পরিমাণ (শতক)</div>
+                    <input type="number" placeholder="শতক" class="dag-amount" step="0.01" min="0" required>
+                </div>
+                <button class="remove-btn" onclick="removeDag(${dagCount})" title="মুছে ফেলুন">×</button>
+            `;
+            
+            container.appendChild(dagDiv);
+        }
+
+        function removeDag(id) {
+            const element = document.getElementById(`dag-${id}`);
+            if (document.querySelectorAll('.dag-row').length > 1) {
+                element.remove();
+            } else {
+                alert('কমপক্ষে একটি দাগ থাকতে হবে!');
+            }
+        }
+
+        function calculateResults() {
+            const persons = [];
+            const personRows = document.querySelectorAll('.person-row');
+            let totalAnaAllPersons = 0;
+            
+            for (let row of personRows) {
+                const name = row.querySelector('.person-name').value;
+                if (!name) {
+                    alert('সব নাম পূরণ করুন!');
+                    return;
+                }
+                
+                const ana = parseInt(row.querySelector('.portion-ana').value) || 0;
+                const gonda = parseInt(row.querySelector('.portion-gonda').value) || 0;
+                const kara = parseInt(row.querySelector('.portion-kara').value) || 0;
+                const kranti = parseInt(row.querySelector('.portion-kranti').value) || 0;
+                const til = parseInt(row.querySelector('.portion-til').value) || 0;
+                
+                const totalAna = ana + 
+                    (gonda * CONVERSIONS.gondaToAna) + 
+                    (kara * CONVERSIONS.karaToAna) + 
+                    (kranti * CONVERSIONS.krantiToAna) + 
+                    (til * CONVERSIONS.tilToAna);
+                
+                persons.push({
+                    name: name,
+                    totalAna: totalAna
+                });
+                
+                totalAnaAllPersons += totalAna;
+            }
+
+            // Check if total is 0
+            if (totalAnaAllPersons === 0) {
+                alert('কমপক্ষে একজনের অংশ নির্বাচন করুন!');
+                return;
+            }
+
+            // Calculate relative portions (percentage based)
+            persons.forEach(person => {
+                person.portion = person.totalAna / totalAnaAllPersons;
+                person.percentage = (person.portion * 100).toFixed(2);
+            });
+
+            const dags = [];
+            const dagRows = document.querySelectorAll('.dag-row');
+            
+            for (let row of dagRows) {
+                const number = row.querySelector('.dag-number').value;
+                const amount = parseFloat(row.querySelector('.dag-amount').value) || 0;
+                
+                if (!number) {
+                    alert('সব দাগ নম্বর পূরণ করুন!');
+                    return;
+                }
+                
+                dags.push({ number, amount });
+            }
+
+            const resultSection = document.getElementById('result-section');
+            const resultHead = document.getElementById('result-head');
+            const resultBody = document.getElementById('result-body');
+            const summaryCards = document.getElementById('summary-cards');
+            const statusMessage = document.getElementById('status-message');
+            
+            resultHead.innerHTML = '';
+            resultBody.innerHTML = '';
+            summaryCards.innerHTML = '';
+            statusMessage.innerHTML = '';
+
+            // Show status message
+            const totalAnaIn16 = totalAnaAllPersons / 16;
+            if (Math.abs(totalAnaAllPersons - 16) < 0.001) {
+                statusMessage.innerHTML = `<div class="success-box">✅ মোট অংশ ঠিক ১৬ আনা (${totalAnaAllPersons.toFixed(3)} আনা)</div>`;
+            } else {
+                statusMessage.innerHTML = `<div class="warning-box">⚠️ মোট অংশ ১৬ আনার ${totalAnaAllPersons > 16 ? 'বেশি' : 'কম'} (${totalAnaAllPersons.toFixed(3)} আনা = ${totalAnaIn16.toFixed(3)} কানি)<br>প্রত্যেকের ভাগ মোট অংশের অনুপাতে হিসাব করা হয়েছে।</div>`;
+            }
+
+            // Create headers
+            let headerRow = '<tr><th>দাগ নম্বর</th><th>মোট জমি</th>';
+            persons.forEach(person => {
+                headerRow += `<th>${person.name}<br><small>${person.totalAna.toFixed(3)} আনা <span class="percentage-badge">${person.percentage}%</span></small></th>`;
+            });
+            headerRow += '</tr>';
+            resultHead.innerHTML = headerRow;
+
+            // Calculate shares
+            let totalLand = 0;
+            let personTotals = new Array(persons.length).fill(0);
+            
+            dags.forEach(dag => {
+                totalLand += dag.amount;
+                let rowHtml = `<tr><td><strong>${dag.number}</strong></td><td>${dag.amount.toFixed(2)} শতক</td>`;
+                
+                persons.forEach((person, index) => {
+                    const share = dag.amount * person.portion;
+                    personTotals[index] += share;
+                    rowHtml += `<td>${share.toFixed(3)} শতক</td>`;
+                });
+                
+                rowHtml += '</tr>';
+                resultBody.innerHTML += rowHtml;
+            });
+
+            // Total row
+            let totalRow = `<tr class="total-row"><td><strong>মোট</strong></td><td><strong>${totalLand.toFixed(2)} শতক</strong></td>`;
+            persons.forEach((person, index) => {
+                totalRow += `<td><strong>${personTotals[index].toFixed(3)} শতক</strong></td>`;
+            });
+            totalRow += '</tr>';
+            resultBody.innerHTML += totalRow;
+
+            // Summary cards
+            summaryCards.innerHTML = `
+                <div class="summary-card">
+                    <h3>মোট দাগ</h3>
+                    <div class="value">${dags.length}টি</div>
+                </div>
+                <div class="summary-card">
+                    <h3>মোট জমি</h3>
+                    <div class="value">${totalLand.toFixed(2)} শতক</div>
+                </div>
+                <div class="summary-card">
+                    <h3>অংশদার সংখ্যা</h3>
+                    <div class="value">${persons.length}জন</div>
+                </div>
+                <div class="summary-card">
+                    <h3>মোট অংশ</h3>
+                    <div class="value">${totalAnaAllPersons.toFixed(3)} আনা</div>
+                </div>
+            `;
+
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
