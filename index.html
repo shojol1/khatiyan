@@ -18,342 +18,411 @@
         }
 
         :root {
-            --bangla-font: 'Kalpurush', 'SolaimanLipi', 'Segoe UI', sans-serif;
+            --bangla-font: 'Kalpurush', 'SolaimanLipi', sans-serif;
+            --primary: #2c5282;
+            --primary-dark: #1a365d;
+            --accent: #d69e2e;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #1a202c;
+            --text-light: #4a5568;
+            --border: #e2e8f0;
+            --success: #38a169;
+            --error: #e53e3e;
+            --warning: #dd6b20;
         }
 
         body {
             font-family: var(--bangla-font);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg);
             min-height: 100vh;
-            padding: 10px;
+            padding: 0;
             font-size: 16px;
             line-height: 1.6;
+            color: var(--text);
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            max-width: 100%;
+            margin: 0;
+            background: var(--bg);
+            min-height: 100vh;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            background: var(--card);
+            color: var(--text);
             padding: 20px;
             text-align: center;
+            border-bottom: 3px solid var(--accent);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .header h1 {
             font-family: var(--bangla-font);
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 5px;
             font-weight: bold;
+            color: var(--primary-dark);
         }
 
         .header p {
             font-family: var(--bangla-font);
-            font-size: 1em;
-            opacity: 0.9;
+            font-size: 0.95em;
+            color: var(--text-light);
         }
 
         .content {
             padding: 15px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .section {
             margin-bottom: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            border-left: 4px solid #667eea;
+            background: var(--card);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .section-title {
             font-family: var(--bangla-font);
-            font-size: 1.3em;
-            color: #2c3e50;
+            font-size: 1.1em;
+            color: var(--primary);
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
             font-weight: bold;
         }
 
         .person-row {
             display: grid;
             grid-template-columns: repeat(6, 1fr) auto;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 15px;
             align-items: end;
-            background: white;
-            padding: 12px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            animation: slideIn 0.3s ease;
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
             min-width: 800px;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .scroll-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 5px;
-        }
-
-        .scroll-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 4px;
-        }
-
-        input, select {
-            font-family: var(--bangla-font);
-            padding: 10px 8px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s;
-            width: 100%;
-            min-width: 0;
-        }
-
-        select {
-            cursor: pointer;
-            background: white;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        input::placeholder {
-            font-family: var(--bangla-font);
-        }
-
-        .label {
-            font-family: var(--bangla-font);
-            font-size: 0.85em;
-            color: #666;
-            margin-bottom: 4px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .add-btn {
-            font-family: var(--bangla-font);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .add-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .remove-btn {
-            font-family: var(--bangla-font);
-            background: #e74c3c;
-            color: white;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .remove-btn:hover {
-            background: #c0392b;
-            transform: scale(1.1);
         }
 
         .dag-row {
             display: grid;
             grid-template-columns: 1fr 1fr auto;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 12px;
             align-items: end;
-            background: white;
-            padding: 12px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        input, select {
+            font-family: var(--bangla-font);
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1em;
+            transition: all 0.2s;
+            width: 100%;
+            background: var(--card);
+            color: var(--text);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+        }
+
+        input::placeholder {
+            font-family: var(--bangla-font);
+            color: #a0aec0;
+        }
+
+        .label {
+            font-family: var(--bangla-font);
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-bottom: 6px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .add-btn {
+            font-family: var(--bangla-font);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .remove-btn {
+            font-family: var(--bangla-font);
+            background: transparent;
+            color: var(--error);
+            border: 1px solid var(--error);
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: var(--error);
+            color: white;
         }
 
         .calculate-btn {
             font-family: var(--bangla-font);
             width: 100%;
-            padding: 16px;
-            font-size: 1.2em;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 14px;
+            font-size: 1.1em;
+            background: var(--success);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
+            transition: all 0.2s;
+            margin-top: 10px;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+            background: #2f855a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
         }
 
         .result-section {
             margin-top: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
+            background: var(--card);
+            border-radius: 8px;
             padding: 20px;
             display: none;
+            border: 1px solid var(--border);
         }
 
         .result-section.show {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .result-title {
             font-family: var(--bangla-font);
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
             text-align: center;
             font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
         }
 
         .result-table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--card);
             font-size: 0.9em;
             font-family: var(--bangla-font);
+            border: 1px solid var(--border);
         }
 
         .result-table th, .result-table td {
-            padding: 10px 8px;
+            padding: 12px 10px;
             text-align: center;
-            border-bottom: 1px solid #e0e0e0;
-            font-family: var(--bangla-font);
+            border: 1px solid var(--border);
+            vertical-align: top;
         }
 
         .result-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary);
             color: white;
             font-weight: 600;
-            white-space: nowrap;
+        }
+
+        .result-table tr:nth-child(even) {
+            background: var(--bg);
         }
 
         .total-row {
-            background: #e8f5e9 !important;
+            background: #c6f6d5 !important;
             font-weight: bold;
-            color: #2e7d32;
+            color: #22543d;
+        }
+
+        /* Person header with details */
+        .person-header {
+            line-height: 1.8;
+        }
+
+        .person-name-header {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 5px;
+        }
+
+        .person-details {
+            font-size: 0.85em;
+            color: #e2e8f0;
+            font-weight: normal;
+        }
+
+        .person-details .unit {
+            display: inline-block;
+            margin: 0 3px;
+        }
+
+        .percentage-badge {
+            background: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 5px;
+            font-family: var(--bangla-font);
+            font-weight: bold;
         }
 
         .summary-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .summary-card {
-            background: white;
+            background: var(--bg);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 6px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
         }
 
         .summary-card h3 {
             font-family: var(--bangla-font);
-            color: #667eea;
-            font-size: 0.9em;
+            color: var(--text-light);
+            font-size: 0.8em;
             margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .summary-card .value {
             font-family: var(--bangla-font);
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary);
         }
 
-        .percentage-badge {
-            background: #667eea;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            margin-left: 5px;
+        .scroll-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: var(--border);
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .scroll-hint {
+            display: none;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #ebf8ff;
+            border-radius: 4px;
             font-family: var(--bangla-font);
+            border: 1px solid #bee3f8;
+        }
+
+        .error-box {
+            font-family: var(--bangla-font);
+            background: #fed7d7;
+            border-left: 4px solid var(--error);
+            color: #742a2a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .success-box {
+            font-family: var(--bangla-font);
+            background: #c6f6d5;
+            border-left: 4px solid var(--success);
+            color: #22543d;
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .info-box {
+            font-family: var(--bangla-font);
+            background: #feebc8;
+            border-left: 4px solid var(--warning);
+            color: #744210;
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
         }
 
         @media (min-width: 1024px) {
             .person-row {
                 min-width: auto;
-                grid-template-columns: 2fr repeat(5, 1fr) auto;
             }
             
             .header h1 {
-                font-size: 2.3em;
-            }
-            
-            .section-title {
-                font-size: 1.4em;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .person-row {
-                min-width: 700px;
+                font-size: 2em;
             }
         }
 
         @media (max-width: 767px) {
             body {
-                padding: 5px;
-                font-size: 14px;
+                font-size: 15px;
             }
             
             .header {
@@ -361,7 +430,7 @@
             }
             
             .header h1 {
-                font-size: 1.7em;
+                font-size: 1.5em;
             }
             
             .content {
@@ -369,94 +438,37 @@
             }
             
             .section {
-                padding: 12px;
+                padding: 15px;
             }
             
             .person-row {
                 min-width: 750px;
-                gap: 6px;
-                padding: 10px;
+                gap: 8px;
+                padding: 12px;
             }
             
             input, select {
-                padding: 8px 6px;
-                font-size: 0.95em;
+                padding: 8px 10px;
             }
             
-            .label {
-                font-size: 0.8em;
-            }
-        }
-
-        .scroll-hint {
-            display: none;
-            text-align: center;
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #e3f2fd;
-            border-radius: 5px;
-            font-family: var(--bangla-font);
-        }
-
-        @media (max-width: 767px) {
             .scroll-hint {
                 display: block;
             }
-        }
-
-        .error-box {
-            font-family: var(--bangla-font);
-            background: #f8d7da;
-            border: 2px solid #dc3545;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.8;
-        }
-
-        .success-box {
-            font-family: var(--bangla-font);
-            background: #d4edda;
-            border: 1px solid #28a745;
-            color: #155724;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
-        .info-box {
-            font-family: var(--bangla-font);
-            background: #d1ecf1;
-            border: 1px solid #17a2b8;
-            color: #0c5460;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 1em;
-            line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌾 খতিয়ান হিসাব</h1>
-            <p></p>
+            <h1>খতিয়ান হিসাব</h1>
+            <p>ঐতিহ্যবাহী একক অনুযায়ী জমি ভাগ করুন</p>
         </div>
 
         <div class="content">
             <!-- Section 1: Names and Portions -->
             <div class="section">
-                <h2 class="section-title">সেকশন ১: ব্যক্তি এবং অংশ</h2>
-                <div class="scroll-hint">👆 বামে ডানে স্ক্রল করুন</div>
+                <h2 class="section-title">ব্যক্তি এবং অংশ</h2>
+                <div class="scroll-hint">বামে ডানে স্ক্রল করুন</div>
                 <div class="scroll-container">
                     <div id="persons-container"></div>
                 </div>
@@ -465,17 +477,17 @@
 
             <!-- Section 2: Dag Numbers -->
             <div class="section">
-                <h2 class="section-title">সেকশন ২: দাগ নম্বর এবং জমির পরিমাণ</h2>
+                <h2 class="section-title">দাগ নম্বর এবং জমির পরিমাণ</h2>
                 <div id="dags-container"></div>
                 <button class="add-btn" onclick="addDag()" title="নতুন দাগ যোগ করুন">+</button>
             </div>
 
             <button class="calculate-btn" onclick="calculateResults()">
-                📊 ফলাফল দেখুন
+                ফলাফল দেখুন
             </button>
 
             <div id="result-section" class="result-section">
-                <h2 class="result-title">📋 হিসাবের ফলাফল</h2>
+                <h2 class="result-title">হিসাবের ফলাফল</h2>
                 
                 <div id="status-message"></div>
                 
@@ -502,6 +514,35 @@
             tilToAna: 1/9600
         };
 
+        // Reverse conversion for display
+        function anaToUnits(totalAna) {
+            const ana = Math.floor(totalAna);
+            let remainder = totalAna - ana;
+            
+            const gonda = Math.floor(remainder * 20);
+            remainder = remainder * 20 - gonda;
+            
+            const kara = Math.floor(remainder * 8);
+            remainder = remainder * 8 - kara;
+            
+            const kranti = Math.floor(remainder * 3);
+            remainder = remainder * 3 - kranti;
+            
+            const til = Math.round(remainder * 20);
+            
+            return { ana, gonda, kara, kranti, til };
+        }
+
+        function formatUnits(units) {
+            let parts = [];
+            if (units.ana > 0) parts.push(`${units.ana} আনা`);
+            if (units.gonda > 0) parts.push(`${units.gonda} গন্ডা`);
+            if (units.kara > 0) parts.push(`${units.kara} কড়া`);
+            if (units.kranti > 0) parts.push(`${units.kranti} ক্রান্তি`);
+            if (units.til > 0) parts.push(`${units.til} তিল`);
+            return parts.length > 0 ? parts.join(' ') : '০';
+        }
+
         window.onload = function() {
             addPerson();
             addDag();
@@ -523,7 +564,7 @@
                 <div>
                     <div class="label">আনা</div>
                     <select class="portion-ana">
-                        <option value="0">আনা নির্বাচন</option>
+                        <option value="0">নির্বাচন</option>
                         <option value="1">১ আনা (৴)</option>
                         <option value="2">২ আনা (৵)</option>
                         <option value="3">৩ আনা (৶)</option>
@@ -545,68 +586,68 @@
                 <div>
                     <div class="label">গন্ডা</div>
                     <select class="portion-gonda">
-                        <option value="0">গন্ডা নির্বাচন</option>
-                        <option value="1">১ গন্ডা</option>
-                        <option value="2">২ গন্ডা</option>
-                        <option value="3">৩ গন্ডা</option>
-                        <option value="4">৪ গন্ডা</option>
-                        <option value="5">৫ গন্ডা</option>
-                        <option value="6">৬ গন্ডা</option>
-                        <option value="7">৭ গন্ডা</option>
-                        <option value="8">৮ গন্ডা</option>
-                        <option value="9">৯ গন্ডা</option>
-                        <option value="10">১০ গন্ডা</option>
-                        <option value="11">১১ গন্ডা</option>
-                        <option value="12">১২ গন্ডা</option>
-                        <option value="13">১৩ গন্ডা</option>
-                        <option value="14">১৪ গন্ডা</option>
-                        <option value="15">১৫ গন্ডা</option>
-                        <option value="16">১৬ গন্ডা</option>
-                        <option value="17">১৭ গন্ডা</option>
-                        <option value="18">১৮ গন্ডা</option>
-                        <option value="19">১৯ গন্ডা</option>
+                        <option value="0">নির্বাচন</option>
+                        <option value="1">১</option>
+                        <option value="2">২</option>
+                        <option value="3">৩</option>
+                        <option value="4">৪</option>
+                        <option value="5">৫</option>
+                        <option value="6">৬</option>
+                        <option value="7">৭</option>
+                        <option value="8">৮</option>
+                        <option value="9">৯</option>
+                        <option value="10">১০</option>
+                        <option value="11">১১</option>
+                        <option value="12">১২</option>
+                        <option value="13">১৩</option>
+                        <option value="14">১৪</option>
+                        <option value="15">১৫</option>
+                        <option value="16">১৬</option>
+                        <option value="17">১৭</option>
+                        <option value="18">১৮</option>
+                        <option value="19">১৯</option>
                     </select>
                 </div>
                 <div>
                     <div class="label">কড়া</div>
                     <select class="portion-kara">
-                        <option value="0">কড়া নির্বাচন</option>
-                        <option value="1">১ কড়া (|)</option>
-                        <option value="2">২ কড়া (||)</option>
-                        <option value="3">৩ কড়া (৸)</option>
+                        <option value="0">নির্বাচন</option>
+                        <option value="1">১ (|)</option>
+                        <option value="2">২ (||)</option>
+                        <option value="3">৩ (৸)</option>
                     </select>
                 </div>
                 <div>
                     <div class="label">ক্রান্তি</div>
                     <select class="portion-kranti">
-                        <option value="0">ক্রান্তি নির্বাচন</option>
-                        <option value="1">১ ক্রান্তি (/)</option>
-                        <option value="2">২ ক্রান্তি (//)</option>
+                        <option value="0">নির্বাচন</option>
+                        <option value="1">১ (/)</option>
+                        <option value="2">২ (//)</option>
                     </select>
                 </div>
                 <div>
                     <div class="label">তিল</div>
                     <select class="portion-til">
-                        <option value="0">তিল নির্বাচন</option>
-                        <option value="1">১ তিল</option>
-                        <option value="2">২ তিল</option>
-                        <option value="3">৩ তিল</option>
-                        <option value="4">৪ তিল</option>
-                        <option value="5">৫ তিল</option>
-                        <option value="6">৬ তিল</option>
-                        <option value="7">৭ তিল</option>
-                        <option value="8">৮ তিল</option>
-                        <option value="9">৯ তিল</option>
-                        <option value="10">১০ তিল</option>
-                        <option value="11">১১ তিল</option>
-                        <option value="12">১২ তিল</option>
-                        <option value="13">১৩ তিল</option>
-                        <option value="14">১৪ তিল</option>
-                        <option value="15">১৫ তিল</option>
-                        <option value="16">১৬ তিল</option>
-                        <option value="17">১৭ তিল</option>
-                        <option value="18">১৮ তিল</option>
-                        <option value="19">১৯ তিল</option>
+                        <option value="0">নির্বাচন</option>
+                        <option value="1">১</option>
+                        <option value="2">২</option>
+                        <option value="3">৩</option>
+                        <option value="4">৪</option>
+                        <option value="5">৫</option>
+                        <option value="6">৬</option>
+                        <option value="7">৭</option>
+                        <option value="8">৮</option>
+                        <option value="9">৯</option>
+                        <option value="10">১০</option>
+                        <option value="11">১১</option>
+                        <option value="12">১২</option>
+                        <option value="13">১৩</option>
+                        <option value="14">১৪</option>
+                        <option value="15">১৫</option>
+                        <option value="16">১৬</option>
+                        <option value="17">১৭</option>
+                        <option value="18">১৮</option>
+                        <option value="19">১৯</option>
                     </select>
                 </div>
                 <button class="remove-btn" onclick="removePerson(${personCount})" title="মুছে ফেলুন">×</button>
@@ -680,21 +721,24 @@
                     (kranti * CONVERSIONS.krantiToAna) + 
                     (til * CONVERSIONS.tilToAna);
                 
+                // Store original values for display
+                const units = { ana, gonda, kara, kranti, til };
+                
                 persons.push({
                     name: name,
-                    totalAna: totalAna
+                    totalAna: totalAna,
+                    units: units,
+                    displayUnits: formatUnits(units)
                 });
                 
                 totalAnaAllPersons += totalAna;
             }
 
-            // Check if total is 0
             if (totalAnaAllPersons === 0) {
                 alert('কমপক্ষে একজনের অংশ নির্বাচন করুন!');
                 return;
             }
 
-            // Check if total exceeds 16 ana - SHOW ERROR AND STOP
             if (totalAnaAllPersons > 16) {
                 const excess = totalAnaAllPersons - 16;
                 const resultSection = document.getElementById('result-section');
@@ -703,29 +747,24 @@
                 const resultHead = document.getElementById('result-head');
                 const resultBody = document.getElementById('result-body');
                 
-                // Clear previous results
                 resultHead.innerHTML = '';
                 resultBody.innerHTML = '';
                 summaryCards.innerHTML = '';
                 
-                // Show error message
                 statusMessage.innerHTML = `
                     <div class="error-box">
-                        ⚠️ ভুল!<br>
-                        মোট অংশ ১৬ আনার বেশি হয়েছে!<br>
+                        ভুল! মোট অংশ ১৬ আনার বেশি হয়েছে।<br>
                         বর্তমান মোট: ${totalAnaAllPersons.toFixed(3)} আনা<br>
-                        অতিরিক্ত: ${excess.toFixed(3)} আনা<br><br>
+                        অতিরিক্ত: ${excess.toFixed(3)} আনা<br>
                         দয়া করে অংশ কমিয়ে ১৬ আনার মধ্যে রাখুন।
                     </div>
                 `;
                 
-                // Show result section with error only
                 resultSection.classList.add('show');
                 resultSection.scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
-            // Calculate relative portions (percentage based)
             persons.forEach(person => {
                 person.portion = person.totalAna / totalAnaAllPersons;
                 person.percentage = (person.portion * 100).toFixed(2);
@@ -757,29 +796,37 @@
             summaryCards.innerHTML = '';
             statusMessage.innerHTML = '';
 
-            // Show status message
             if (Math.abs(totalAnaAllPersons - 16) < 0.001) {
-                statusMessage.innerHTML = `<div class="success-box">✅ মোট অংশ ঠিক ১৬ আনা (${totalAnaAllPersons.toFixed(3)} আনা)</div>`;
+                statusMessage.innerHTML = `<div class="success-box">মোট অংশ ঠিক ১৬ আনা (${totalAnaAllPersons.toFixed(3)} আনা)</div>`;
             } else {
                 const remaining = 16 - totalAnaAllPersons;
                 statusMessage.innerHTML = `
                     <div class="info-box">
-                        ℹ️ মোট অংশ ১৬ আনার চেয়ে কম (${totalAnaAllPersons.toFixed(3)} আনা)<br>
+                        মোট অংশ ১৬ আনার চেয়ে কম (${totalAnaAllPersons.toFixed(3)} আনা)<br>
                         বাকি: ${remaining.toFixed(3)} আনা<br>
                         প্রত্যেকের ভাগ মোট দেওয়া অংশের অনুপাতে হিসাব করা হয়েছে।
                     </div>
                 `;
             }
 
-            // Create headers
+            // Create headers with person details like input format
             let headerRow = '<tr><th>দাগ নম্বর</th><th>মোট জমি</th>';
             persons.forEach(person => {
-                headerRow += `<th>${person.name}<br><small>${person.totalAna.toFixed(3)} আনা <span class="percentage-badge">${person.percentage}%</span></small></th>`;
+                headerRow += `
+                    <th>
+                        <div class="person-header">
+                            <div class="person-name-header">${person.name}</div>
+                            <div class="person-details">
+                                ${person.displayUnits}
+                                <span class="percentage-badge">${person.percentage}%</span>
+                            </div>
+                        </div>
+                    </th>
+                `;
             });
             headerRow += '</tr>';
             resultHead.innerHTML = headerRow;
 
-            // Calculate shares
             let totalLand = 0;
             let personTotals = new Array(persons.length).fill(0);
             
@@ -797,7 +844,6 @@
                 resultBody.innerHTML += rowHtml;
             });
 
-            // Total row
             let totalRow = `<tr class="total-row"><td><strong>মোট</strong></td><td><strong>${totalLand.toFixed(2)} শতক</strong></td>`;
             persons.forEach((person, index) => {
                 totalRow += `<td><strong>${personTotals[index].toFixed(3)} শতক</strong></td>`;
@@ -805,7 +851,6 @@
             totalRow += '</tr>';
             resultBody.innerHTML += totalRow;
 
-            // Summary cards
             summaryCards.innerHTML = `
                 <div class="summary-card">
                     <h3>মোট দাগ</h3>
@@ -816,7 +861,7 @@
                     <div class="value">${totalLand.toFixed(2)} শতক</div>
                 </div>
                 <div class="summary-card">
-                    <h3>অংশদার সংখ্যা</h3>
+                    <h3>অংশদার</h3>
                     <div class="value">${persons.length}জন</div>
                 </div>
                 <div class="summary-card">
